@@ -1,7 +1,11 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { CreateEpisodeDto } from './dto/create-episode.dto';
+import { EpisodesService } from './episodes.service';
 
 @Controller('episodes')
 export class EpisodesController {
+  constructor(private episodesService: EpisodesService) {}
+
   @Get()
   findAll(@Query('sort') sort: 'asc' | 'desc' = 'desc') {
     console.log(sort);
@@ -19,7 +23,7 @@ export class EpisodesController {
   }
 
   @Post()
-  create(@Body() input: any) {
-    return 'new episode';
+  create(@Body() input: CreateEpisodeDto) {
+    return this.episodesService.create(input);
   }
 }
