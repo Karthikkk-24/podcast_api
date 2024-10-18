@@ -26,4 +26,12 @@ describe('EpisodesController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  describe('fineOne', () => {
+    it('should return correct response', async () => {
+      const episodeId = 'id';
+      const result = await controller.findOne(episodeId);
+      expect(result).toEqual({ id: 'id' });
+    });
+  });
 });
